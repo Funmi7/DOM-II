@@ -10,6 +10,8 @@ const buttons = document.querySelectorAll('.btn');
 const scroll = document.querySelector('.scroll');
 const scrollText = document.createElement('p');
 const resizedCount = document.querySelector('span');
+const sunDiv = document.querySelector('.destination');
+const smuButton = document.querySelector('.btn');
 
 
 //Event Listeners 1
@@ -86,7 +88,7 @@ window.addEventListener('resize', resizeFunction);
 let x = 0;
 function resizeFunction() {
     let txt = x += 1;
-resizedCount.innerHTML = txt;
+    alert(`This page was resized ${txt} times`);
 }
 
 //Event listener 9
@@ -100,3 +102,31 @@ buttons.forEach((button) => {
     });
 })
 
+//Event listener 10
+let count = 0;
+buttons.forEach((button) => {
+    button.addEventListener('mouseenter', () =>{
+        count++;
+        if(count > 4) {
+            alert(`You hovered over this button ${count} times`);
+        }
+    });
+});
+
+//Preventing event propagtion
+sunDiv.addEventListener('click', (event) =>{
+    event.target.style.backgroundColor = 'lime';
+});
+
+smuButton.addEventListener('click', (event) =>{
+    event.target.style.backgroundColor = 'red';
+    event.target.style.border = '1px solid purple';
+    event.stopPropagation();
+});
+
+//stopped navigation from refreshing the page
+navs.forEach((nav) => {
+    nav.addEventListener('click', (event) =>{
+        event.preventDefault();
+    });
+});
